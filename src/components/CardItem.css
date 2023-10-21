@@ -1,0 +1,7 @@
+.line-box {
+  border: 1px solid #000; /* Line box border */
+  padding: 10px; /* Space inside the line box */
+  margin: 10px 0; /* Space outside the line box */
+  max-width: 80%; /* Maximum width of the text box */
+  word-wrap: break-word; /* Breaking words to prevent overflow */
+}
