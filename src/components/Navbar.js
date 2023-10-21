@@ -1,21 +1,25 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { Button } from "./Button"; // Importing the Button component
 import "./Navbar.css";
 
 function Navbar() {
   const [click, setClick] = useState(false);
+  const [button, setButton] = useState(true);
 
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
 
+  const showButton = () => {
+    if (window.innerWidth <= 960) {
+      setButton(false);
+    } else {
+      setButton(true);
+    }
+  };
+
   useEffect(() => {
-    const showButton = () => {
-      // Here you can decide what you want to do when the window is resized
-      // Currently, this function doesn't have any effect.
-    };
-
     showButton(); // Call once initially
-
     window.addEventListener("resize", showButton);
 
     // Cleanup: Remove the event listener when the component is unmounted
@@ -59,6 +63,11 @@ function Navbar() {
               </Link>
             </li>
           </ul>
+          {button && (
+            <Button buttonStyle="btn--outline" to="/sign-up">
+              Sign Up
+            </Button>
+          )}
         </div>
       </nav>
     </>

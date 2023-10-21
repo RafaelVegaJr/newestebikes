@@ -10,7 +10,6 @@ import Home from "./pages/Home";
 // import ProtectedRoute from "./path-to-your-protected-route-component";
 
 const App = () => {
-  <h1>Hello</h1>;
   console.log("Are you working");
   return (
     // <Auth0Provider
