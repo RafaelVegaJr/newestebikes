@@ -66,11 +66,15 @@ h1 {
   font-size: 12px;
   font-weight: 700;
   color: #fff;
-  background-color: #1f98f4;
+  background-color: #010101;
   box-sizing: border-box;
 }
 
 .cards__item__img {
+  /* clip-path: circle(50% at 50% 50%); */
+  clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%);
+  /* clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%); */
+  /* clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%); */
   position: absolute;
   top: 0;
   right: 0;

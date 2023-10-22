@@ -6,6 +6,8 @@ import "./Navbar.css";
 function Navbar() {
   const [click, setClick] = useState(false);
   const [button, setButton] = useState(true);
+  const [lastScrollTop, setLastScrollTop] = useState(0);
+  const [isHidden, setIsHidden] = useState(false);
 
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
@@ -28,9 +30,37 @@ function Navbar() {
     };
   }, []); // Empty dependency array, as this effect should only run once
 
+  useEffect(() => {
+    const handleScroll = () => {
+      let st = window.pageYOffset || document.documentElement.scrollTop;
+      if (st > lastScrollTop) {
+        setIsHidden(true);
+      } else {
+        setIsHidden(false);
+      }
+      setLastScrollTop(st <= 0 ? 0 : st);
+    };
+
+    let timerId = null;
+    const handleScrollStop = () => {
+      clearTimeout(timerId);
+      timerId = setTimeout(() => {
+        setIsHidden(false);
+      }, 150);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScrollStop);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("scroll", handleScrollStop);
+    };
+  }, [lastScrollTop]);
+
   return (
     <>
-      <nav className="navbar">
+      <nav className={`navbar ${isHidden ? "hide-nav" : ""}`}>
         <div className="navbar-container">
           <Link to="/" className="navbar-logo" onClick={closeMobileMenu}>
             CDR <i className="fas fa-bicycle" />
